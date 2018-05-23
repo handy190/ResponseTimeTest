@@ -1,1 +1,0 @@
-com.tencent.news/com.tencent.news.activity.SplashActivity
