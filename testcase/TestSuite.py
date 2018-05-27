@@ -1,17 +1,14 @@
 import pytest
 import unittest
-import time
-import sys
-import os
+from base.Activities import Activities
+from testcase.HotStartupTest import HotStartupTest
 
 
-from adb_wrapper.adb_wrapper import AdbWrapper, AdbShell
 class TestSuite:
 
 
-    def clock(self):
-        a = "hello"
-        assert 'h' in a
+    def testHot(self):
+        HotStartupTest().hotStartupTest(Activities.DIALER.value)
 
 
 
