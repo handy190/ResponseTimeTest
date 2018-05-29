@@ -2,10 +2,10 @@
 from enum import Enum, unique
 
 """
-    自定义枚举类，用来存放需要测试的activity集合
+    Activity枚举类，用来存放需要测试的activity集合
 """
 @unique
-class Acivity(Enum):
+class Activities(Enum):
 
     MESSAGE = "com.android.mms/.ui.ConversationList",
 
@@ -27,7 +27,7 @@ class Acivity(Enum):
 
     BROWSER = "com.android.browser/.BrowserActivity"
 
-    PHONE = "com.android.dialer/.app.DialtactsActivity"
+    DIALER = "com.android.dialer/.DialtactsActivity"
 
     QQ = "qq"
 

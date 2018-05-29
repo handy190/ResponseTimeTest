@@ -4,17 +4,26 @@ import os
 import subprocess
 import datetime
 from distutils.spawn import find_executable
-
+from base.Activities import Activities
 
 
 class ADB(object):
 
+    # 全局变量,用于标记
+    FLAG = ''
 
     adb_path = find_executable("adb")
 
     if not adb_path:
         print('adb path not found.')
-        exit(-1)
+        exit()
+
+    def setFlag(self, flag):
+        global FLAG
+        FLAG = flag
+
+    def getFlag(self):
+        return FLAG
 
     def __init__(self, serial=None):
         self._serial = serial
@@ -36,7 +45,10 @@ class ADB(object):
 
         command_result = ''
         command_text = 'adb %s ' % command
-        write_text = open(r"/Users/hongzhi/Test/raw_data.txt", "a+") # 每个应用对应一个文件比较合适
+        if (FLAG == "COLD") :
+            write_text = open(r"/Users/hongzhi/Test/ColdTestData/raw_data.txt", "a+") # 每个应用对应一个文件比较合适
+        else:
+            write_text = open(r"/Users/hongzhi/Test/HotTestData/raw_data.txt", "a+")
         try:
             pipe = subprocess.Popen(command_text, shell=True, stdout=write_text).stdout
         finally:
@@ -45,34 +57,34 @@ class ADB(object):
             line = pipe
             if not line: break
             command_result += line
-        return command_result
 
     """
-    单一执行cmd指令，没有对log进行存储
+    单一执行cmd指令，没有对log进行存储操作
     """
     def cmd(self, command):
         command_text = 'adb %s ' % command
+        return command_text
 
-        subprocess.Popen(command_text, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
+        # subprocess.Popen(command_text, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
 
 
     """
     获取手机列表
     """
     def devices(self):
-        result = self.execute("devices")
+        result = self.cmd("devices")
         devices = result.partition('\n')[2].replace('\n', '').split('\tdevice')
         return [device for device in devices if len(device) > 2]
 
 
     """push 文件到手机"""
     def push(self, from_computor, to_phone):
-        return self.execute("push " + from_computor + " " + to_phone)
+        return self.cmd("push " + from_computor + " " + to_phone)
 
 
     """pull 手机文件"""
     def pull(self, from_phone, to_computor):
-        return self.execute("pull " + from_phone + " " + to_computor)
+        return self.cmd("pull " + from_phone + " " + to_computor)
 
 
     """
@@ -80,18 +92,18 @@ class ADB(object):
     apk_path: apk路径
     """
     def install(self, apk_path):
-        return self.execute("install -r -g " + apk_path)
+        return self.cmd("install -r -g " + apk_path)
 
     """
     卸载apk
     package: 应用包名
     """
     def uninstall(self, package):
-        return self.execute("shell pm uninstall " + package)
+        return self.cmd("shell pm uninstall " + package)
 
     """进入adb shell环境"""
     def shell(self, command):
-        return self.execute("shell " + command)
+        return self.cmd("shell " + command)
 
     """
     启动一个activity界面
@@ -106,7 +118,7 @@ class ADB(object):
     参数package: 应用包名
     """
     def force_stop(self, package):
-        return self.shell("am force-stop " + package)
+        return self.cmd(" shell am force-stop " + package)
 
     """
     获取 logcat
@@ -137,7 +149,3 @@ class ADB(object):
 
         return self.execute("shell screencap -p /mnt/sdcard/ScreenShot/screen_shot" + timestamp + ".png")
 
-
-
-test = ADB()
-print(test.devices())
