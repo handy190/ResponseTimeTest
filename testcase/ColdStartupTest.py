@@ -1,15 +1,17 @@
 # -*- coding:utf-8 -*-
 
 from base.Adb import ADB
+from base.Activities import Activities
 import time
+
+"""
+    冷启动,启动目标activity作为的参数
+    参数activityName:应用名称，如CONTACTS,MESSAGE
+"""
 
 class ColdStartupTest(object):
 
 
-    """
-    冷启动,启动目标activity作为的参数
-    参数activityName:应用名称，如CONTACTS,MESSAGE
-    """
     def coldTest(self, activityName):
 
         adb = ADB()
@@ -36,3 +38,7 @@ class ColdStartupTest(object):
             #   每次获取完log就要清除一次
             adb.clearLogcat()
             print("第 " + str(t + 1) + " 次测试ending...")
+
+
+if __name__ == '__main__':
+    ColdStartupTest.coldTest(Activities.CONTACTS.value,"")

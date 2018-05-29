@@ -30,25 +30,29 @@ class ADB(object):
 
     """获取手机序列号"""
     def serial(self):
-        if self._serial:
-            return self._serial
         if os.name == 'nt':
-            self._serial = self.execute("getprop | findstr ro.serialno")
+            return self.execute("getprop | findstr ro.serialno")
         else:
-            self._serial = self.execute("getprop | grep ro.serialno")
-        return self._serial
+            return self.execute("getprop | grep ro.serialno")
+
 
     """
     开启一个execute窗口并且执行command_text命令，将stdout输出到指定文件中
     """
     def execute(self, command):
 
+        os.makedirs(r'e:\TestData',exist_ok=True)
         command_result = ''
         command_text = 'adb %s ' % command
         if (FLAG == "COLD") :
-            write_text = open(r"/Users/hongzhi/Test/ColdTestData/raw_data.txt", "a+") # 每个应用对应一个文件比较合适
+            if (os.name != 'nt'):
+                write_text = open(r'/Users/hongzhi/Test/ColdTestData/raw_data.txt', 'a+') # 每个应用对应一个文件比较合适
+            else:
+                write_text = open(r'e:\TestData\ColdTestData\raw_data.txt', 'a+')
+        elif (os.name != 'nt'):
+                write_text = open(r'/Users/hongzhi/Test/HotTestData/raw_data.txt', 'a+')
         else:
-            write_text = open(r"/Users/hongzhi/Test/HotTestData/raw_data.txt", "a+")
+                write_text = open(r'e:\TestData\HotTestData\raw_data.txt', 'a+')
         try:
             pipe = subprocess.Popen(command_text, shell=True, stdout=write_text).stdout
         finally:
