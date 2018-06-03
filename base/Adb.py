@@ -41,7 +41,7 @@ class ADB(object):
     """
     def execute(self, command):
 
-        os.makedirs(r'e:\TestData',exist_ok=True)
+        os.makedirs(r'..\TestData',exist_ok=True)
         command_result = ''
         command_text = 'adb %s ' % command
         if (FLAG == "COLD") :
