@@ -25,9 +25,6 @@ class ADB(object):
     def getFlag(self):
         return FLAG
 
-    def __init__(self, serial=None):
-        self._serial = serial
-
     """获取手机序列号"""
     def serial(self):
         if os.name == 'nt':
@@ -41,18 +38,13 @@ class ADB(object):
     """
     def execute(self, command):
 
-        os.makedirs(r'..\TestData',exist_ok=True)
+        os.makedirs("../TestData",exist_ok=True)
         command_result = ''
         command_text = 'adb %s ' % command
-        if (FLAG == "COLD") :
-            if (os.name != 'nt'):
-                write_text = open(r'/Users/hongzhi/Test/ColdTestData/raw_data.txt', 'a+') # 每个应用对应一个文件比较合适
-            else:
-                write_text = open(r'e:\TestData\ColdTestData\raw_data.txt', 'a+')
-        elif (os.name != 'nt'):
-                write_text = open(r'/Users/hongzhi/Test/HotTestData/raw_data.txt', 'a+')
+        if (self.getFlag() == "COLD") :
+            write_text = open("../TestData/cold_raw_data.txt", 'a+') # 每个应用对应一个文件比较合适
         else:
-                write_text = open(r'e:\TestData\HotTestData\raw_data.txt', 'a+')
+            write_text = open("../TestData/hot_raw_data.txt", 'a+')
         try:
             pipe = subprocess.Popen(command_text, shell=True, stdout=write_text).stdout
         finally:
@@ -68,8 +60,6 @@ class ADB(object):
     def cmd(self, command):
         command_text = 'adb %s ' % command
         return command_text
-
-        # subprocess.Popen(command_text, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()
 
 
     """

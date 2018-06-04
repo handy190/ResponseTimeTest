@@ -7,9 +7,9 @@ from enum import Enum, unique
 @unique
 class Activities(Enum):
 
-    MESSAGE = "com.android.mms/.ui.ConversationList",
+    MESSAGE = "com.android.mms/.ui.ConversationList"
 
-    CONTACTS = "com.android.contacts/.activities.PeopleActivity",
+    CONTACTS = "com.android.contacts/.activities.PeopleActivity"
 
     CAMERA = "com.mediatek.camera/.CameraLauncher"
 

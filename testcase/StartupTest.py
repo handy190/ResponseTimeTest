@@ -9,7 +9,7 @@ import time
     参数activityName:应用名称，如CONTACTS,MESSAGE
 """
 
-class ColdStartupTest(object):
+class StartupTest(object):
 
 
     def coldTest(self, activityName):
@@ -37,5 +37,26 @@ class ColdStartupTest(object):
             print("第 " + str(t + 1) + " 次cold test ending...")
 
 
-if __name__ == '__main__':
-    ColdStartupTest.coldTest(Activities.CONTACTS.value)
+
+    def hotStartupTest(self, activityName):
+
+        adb = ADB()
+        adb.setFlag("HOT")
+
+        for t in range(11):
+            print("第 " + str(t + 1) + " 次hot test beginning...")
+            # 启动一个activity
+            adb.start(activityName)
+            time.sleep(5.0)
+            adb.getLogcatString("Displayed")
+            time.sleep(5.0)
+            # 手机返回键，确保完全退出,返回操作3次
+            adb.shell("input keyevent 4")
+            # adb.shell("input keyevent 4")
+            # adb.shell("input keyevent 4")
+
+            #   每次获取完log就要清除一次
+            adb.clearLogcat()
+            time.sleep(5.0)
+
+            print("第 " + str(t + 1) + "次hot test ending...")
