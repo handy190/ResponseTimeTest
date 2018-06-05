@@ -1,10 +1,9 @@
-import pytest
-import unittest
+
 from base.Activities import Activities
 from testcase.StartupTest import StartupTest
 
 
-class TestAll():
+class TestAll(object):
 
     """
     遍历Activities
@@ -22,7 +21,7 @@ class TestAll():
 
 
 if __name__ == '__main__':
-    TestAll().test_cold()
+    TestAll().test_hot()
 
 
 

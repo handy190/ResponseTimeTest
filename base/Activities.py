@@ -2,8 +2,10 @@
 from enum import Enum, unique
 
 """
-    Activity枚举类，用来存放需要测试的activity集合
+    自定义Activity枚举类，用来存放需要测试的activity集合
+    注意：activity的书写顺序即为用例执行顺序（因为按照遍历顺序来执行用例），如需改动用例执行顺序在此处改动即可
 """
+
 @unique
 class Activities(Enum):
 
@@ -29,16 +31,20 @@ class Activities(Enum):
 
     DIALER = "com.android.dialer/.DialtactsActivity"
 
-    QQ = "qq"
+    QQ = "com.tencent.mobileqq/.activity.SplashActivity"
 
-    WECHAT = "wechat"
+    WECHAT = "com.tencent.mm/.app.WeChatSplashActivity"
 
     TENCENT_VIDEO = "com.tencent.news/com.tencent.news.activity.SplashActivity"
 
-    JD_SHOPPING = "jd"
+    JD_SHOPPING = "com.jingdong.app.mall/.MainFrameActivity"
 
-    DOUYIN = "dy"
+    DOUYIN = "com.ss.android.ugc.aweme/.main.MainActivity"
 
-    TAOBAO = ""
+    TAOBAO = "com.taobao.taobao/com.taobao.tao.homepage.MainActivity3"
 
-    TENCENT_NEWS = "news"
+    TENCENT_NEWS = "com.tencent.news/.activity.SplashActivity"
+
+    ALIPAY = "com.eg.android.AlipayGphone/.AlipayLogin"
+
+    XIAOXIAOLE = "com.happyelements.AndroidAnimal.qq/com.happyelements.hellolua.MainActivity"

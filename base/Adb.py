@@ -38,11 +38,11 @@ class ADB(object):
     """
     def execute(self, command):
 
-        os.makedirs("../TestData",exist_ok=True)
+        os.makedirs("../TestData", exist_ok=True)
         command_result = ''
         command_text = 'adb %s ' % command
-        if (self.getFlag() == "COLD") :
-            write_text = open("../TestData/cold_raw_data.txt", 'a+') # 每个应用对应一个文件比较合适
+        if self.getFlag() == "COLD":
+            write_text = open("../TestData/cold_raw_data.txt", 'a+')
         else:
             write_text = open("../TestData/hot_raw_data.txt", 'a+')
         try:
@@ -71,12 +71,16 @@ class ADB(object):
         return [device for device in devices if len(device) > 2]
 
 
-    """push 文件到手机"""
+    """
+    push 文件到手机
+    """
     def push(self, from_computor, to_phone):
         return self.cmd("push " + from_computor + " " + to_phone)
 
 
-    """pull 手机文件"""
+    """
+    pull 手机文件
+    """
     def pull(self, from_phone, to_computor):
         return self.cmd("pull " + from_phone + " " + to_computor)
 
@@ -95,16 +99,18 @@ class ADB(object):
     def uninstall(self, package):
         return self.cmd("shell pm uninstall " + package)
 
-    """进入adb shell环境"""
+    """
+    进入adb shell环境
+    """
     def shell(self, command):
-        return self.cmd("shell " + command)
+        return self.execute("shell " + command)
 
     """
     启动一个activity界面
     activity: 指定activity
     """
     def start(self, activity):
-        return self.execute("shell am start " + activity)
+        return self.execute("shell am start -W " + activity)
 
 
     """
@@ -112,7 +118,7 @@ class ADB(object):
     参数package: 应用包名
     """
     def force_stop(self, package):
-        return self.cmd(" shell am force-stop " + package)
+        return self.execute(" shell am force-stop " + package)
 
     """
     获取 logcat
