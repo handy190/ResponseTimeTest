@@ -16,7 +16,8 @@ class w2e(object):
             line = f1.readline()
             if not line:
                 break
-            s1 = re.findall(r'[+]', line, re.M) #多行匹配
+            s1 = re.findall(r'TotalTime: (\w+)*', line, re.M)  #多行匹配
+
             print(s1)
 
     def filter_hot_data(self):

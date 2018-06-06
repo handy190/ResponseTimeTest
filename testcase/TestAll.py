@@ -8,20 +8,19 @@ class TestAll(object):
     """
     遍历Activities
     """
-
     def test_hot(self):
-        for appName,activityName in Activities.__members__.items():
-            StartupTest().hotStartupTest(activityName.value)
-
+        StartupTest().delete_log_file()
+        for appName, activityName in Activities.__members__.items():
+            StartupTest().hot_test(activityName.value)
 
     def test_cold(self):
+        StartupTest().delete_log_file()
         for appName, activityName in Activities.__members__.items():
-            StartupTest().coldTest(activityName.value)
-
+            StartupTest().cold_test(activityName.value)
 
 
 if __name__ == '__main__':
-    TestAll().test_hot()
+    TestAll().test_cold()
 
 
 

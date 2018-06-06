@@ -51,7 +51,8 @@ class ADB(object):
             write_text.close()
         while True:
             line = pipe
-            if not line: break
+            if not line:
+                break
             command_result += line
 
     """
