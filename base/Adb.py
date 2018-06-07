@@ -32,7 +32,6 @@ class ADB(object):
         else:
             return self.execute("getprop | grep ro.serialno")
 
-
     """
     开启一个execute窗口并且执行command_text命令，将stdout输出到指定文件中
     """
@@ -59,7 +58,13 @@ class ADB(object):
     单一执行cmd指令，没有对log进行存储操作
     """
     def cmd(self, command):
+        command_result = ''
         command_text = 'adb %s ' % command
+        results = os.popen(command_text, "r")
+        while 1:
+            line = results.readline()
+            if not line: break
+            command_result += line
         return command_text
 
 
@@ -71,20 +76,17 @@ class ADB(object):
         devices = result.partition('\n')[2].replace('\n', '').split('\tdevice')
         return [device for device in devices if len(device) > 2]
 
-
     """
     push 文件到手机
     """
     def push(self, from_computor, to_phone):
         return self.cmd("push " + from_computor + " " + to_phone)
 
-
     """
     pull 手机文件
     """
     def pull(self, from_phone, to_computor):
         return self.cmd("pull " + from_phone + " " + to_computor)
-
 
     """
     覆盖安装apk,并且默认允许了所有权限
@@ -112,7 +114,6 @@ class ADB(object):
     """
     def start(self, activity):
         return self.execute("shell am start -W " + activity)
-
 
     """
     强制停止应用

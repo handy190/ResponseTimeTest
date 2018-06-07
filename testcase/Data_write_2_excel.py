@@ -13,15 +13,14 @@ class Data(object):
             lines = file1.readlines()
             for i in lines:
                 if 'TotalTime' in i:
-                    data = str(i.split(': ')[1])  # 注意split(': ')后面有个空格
-
+                    cold_data = str(i.split(': ')[1])  # 注意split(': ')后面有个空格
 
     def filter_hot_data(self):
         with open("../TestData/hot_raw_data.txt", 'r') as file2:
             lines = file2.readlines()
             for i in lines:
                 if 'TotalTime' in i:
-                    data = str(i.split(': ')[1])
+                    hot_data = str(i.split(': ')[1])
 
     def write_data_2_excel(self):
         # Create an new Excel file and add a worksheet.

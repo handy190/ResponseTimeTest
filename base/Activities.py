@@ -6,6 +6,7 @@ from enum import Enum, unique
     注意：activity的书写顺序即为用例执行顺序（因为按照遍历顺序来执行用例），如需改动用例执行顺序在此处改动即可
 """
 
+
 @unique
 class Activities(Enum):
 
