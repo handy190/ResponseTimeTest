@@ -24,8 +24,10 @@ if __name__ == '__main__':
     print("Now startup cold test...")
     TestAll().test_cold()
     print("Now startup hot test...")
+    time.sleep(5.0)
     TestAll().test_hot()
     print("Now generate test report")
+    time.sleep(5.0)
     Data().write_data_2_excel()
     print("All Test ending...")
 
