@@ -25,17 +25,23 @@ class ADB(object):
     def getFlag(self):
         return FLAG
 
-    """获取手机序列号"""
     def serial(self):
+        """
+        获取手机序列号
+        :return:
+        """
         if os.name == 'nt':
             return self.execute("getprop | findstr ro.serialno")
         else:
             return self.execute("getprop | grep ro.serialno")
 
-    """
-    开启一个execute窗口并且执行command_text命令，将stdout输出到指定文件中
-    """
+
     def execute(self, command):
+        """
+        开启一个execute窗口并且执行command_text命令，将stdout输出到指定文件中
+        :param command:  adb 命令
+        :return: 返回输出流
+        """
 
         os.makedirs("../TestData", exist_ok=True)
         command_result = ''
@@ -54,10 +60,12 @@ class ADB(object):
                 break
             command_result += line
 
-    """
-    单一执行cmd指令，没有对log进行存储操作
-    """
     def cmd(self, command):
+        """
+        单一执行cmd指令，没有对log进行存储操作
+        :param command:   adb 命令
+        :return:
+        """
         command_result = ''
         command_text = 'adb %s ' % command
         results = os.popen(command_text, "r")
@@ -67,19 +75,22 @@ class ADB(object):
             command_result += line
         return command_text
 
-
-    """
-    获取手机列表
-    """
     def devices(self):
+        """
+        获取手机列表
+        :return:
+        """
         result = self.cmd("devices")
         devices = result.partition('\n')[2].replace('\n', '').split('\tdevice')
         return [device for device in devices if len(device) > 2]
 
-    """
-    push 文件到手机
-    """
     def push(self, from_computor, to_phone):
+        """
+        push 文件到手机
+        :param from_computor:
+        :param to_phone:
+        :return:
+        """
         return self.cmd("push " + from_computor + " " + to_phone)
 
     """
@@ -88,11 +99,12 @@ class ADB(object):
     def pull(self, from_phone, to_computor):
         return self.cmd("pull " + from_phone + " " + to_computor)
 
-    """
-    覆盖安装apk,并且默认允许了所有权限
-    apk_path: apk路径
-    """
     def install(self, apk_path):
+        """
+        覆盖安装apk,并且默认允许了所有权限
+        :param apk_path: apk路径
+        :return:
+        """
         return self.cmd("install -r -g " + apk_path)
 
     """
@@ -102,43 +114,60 @@ class ADB(object):
     def uninstall(self, package):
         return self.cmd("shell pm uninstall " + package)
 
-    """
-    进入adb shell环境
-    """
+
     def shell(self, command):
+        """
+         进入adb shell环境
+        :param command:
+        :return:
+        """
         return self.execute("shell " + command)
 
-    """
-    启动一个activity界面
-    activity: 指定activity
-    """
+
     def start(self, activity):
+        """
+        启动一个activity界面
+        activity: 指定activity
+        :param activity:
+        :return:
+        """
         return self.execute("shell am start -W " + activity)
 
-    """
-    强制停止应用
-    参数package: 应用包名
-    """
     def force_stop(self, package):
+        """
+        强制停止应用
+        :param package: 应用包名
+        :return:
+        """
         return self.execute(" shell am force-stop " + package)
 
-    """
-    获取 logcat
-    参数: -d 将缓存的日志输出到屏幕上，并且不会堵塞
-         -f 定义日志输出的文件位置，例如： adb logcat -f /sdcard/log.txt
-    """
     def getLogcat(self, command):
+        """
+        获取 logcat
+        参数: -d 将缓存的日志输出到屏幕上，并且不会堵塞
+        -f 定义日志输出的文件位置，例如： adb logcat -f /sdcard/log.txt
+        :param command:
+        :return:
+        """
         return self.execute("logcat -d " + command)
 
-    """获取指定字段的logcat"""
+
     def getLogcatString(self, str):
+        """
+        获取指定字段的 logcat
+        :param str:
+        :return:
+        """
         if os.name == 'nt': # Windows 系统
             return self.getLogcat("| findstr " + str)
         else:
             return self.getLogcat("| grep " + str)
 
-    """清除logcat"""
     def clearLogcat(self):
+        """
+        清除logcat
+        :return:
+        """
         return self.getLogcat("-c")
 
     def screenShot(self):
