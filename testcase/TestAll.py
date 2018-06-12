@@ -4,17 +4,28 @@ from testcase.StartupTest import StartupTest
 from testcase.Data_write_2_excel import Data
 import time
 
+
+"""
+冷热启动测试类
+"""
+
+
 class TestAll(object):
 
-    """
-    遍历Activities
-    """
     def test_hot(self):
+        """
+        遍历Activities的方式来启动测试
+        :return:
+        """
         StartupTest().delete_log_file()
         for appName, activityName in Activities.__members__.items():
             StartupTest().hot_test(activityName.value)
 
     def test_cold(self):
+        """
+        同上
+        :return:
+        """
         StartupTest().delete_log_file()
         for appName, activityName in Activities.__members__.items():
             StartupTest().cold_test(activityName.value)

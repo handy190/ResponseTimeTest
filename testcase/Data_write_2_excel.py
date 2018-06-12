@@ -17,31 +17,51 @@ class Data(object):
 
         # Create an new Excel file and add a worksheet.
         workbook = xlsxwriter.Workbook('../report/TestReport.xlsx')
-        worksheet = workbook.add_worksheet('TestData')
+        worksheet = workbook.add_worksheet("测试报告")
 
         # Widen the first column to make the text clearer.
+        worksheet.set_column('A:A', 1)
+        worksheet.set_column('B:B', 1)
         worksheet.set_column('C:C', 35)
-        worksheet.set_row(2, 40)
-        worksheet.set_row(1, 25)
+        worksheet.set_column('D:M', 6)
+        worksheet.set_column('O:X', 6)
+        worksheet.set_row(1, 30)
+        worksheet.set_row(2, 30)
+        worksheet.set_row(3, 30)
+        worksheet.set_row(4, 30)
+        worksheet.set_row(5, 30)
+        worksheet.set_row(2, 30)
+        worksheet.set_row(8, 40)
+        worksheet.set_row(7, 25)
 
         merge_format = workbook.add_format({
             'bg_color': 'yellow',
             'bold': True,
             'border': 6,
             'align': 'center',
-            'valign': 'vcenter',
+            'valign': 'vcenter'
         })
 
+        merge_format1 = workbook.add_format({
+            'bg_color': '#FF8000',
+            'bold': True,
+            'border': 6,
+            'font': '微软雅黑',
+            'font_size': 14,
+            'align': 'center',
+            'valign': 'vcenter'
+        })
 
         # Add a bold format to use to highlight cells.
-
         cell_format1 = workbook.add_format({
             'bold': True,
             'font_color': 'black',
             'font_size': 12,
             'border': 6,
             'font': 'Arial Unicode MS',
-            'bg_color': 'yellow'
+            'bg_color': 'yellow',
+            'align': 'center',
+            'valign': 'vcenter'
         })
 
         # 包名格式
@@ -65,48 +85,74 @@ class Data(object):
             'border': 6
         })
 
-        # 居中对齐
-        cell_format1.set_align('vcenter')
-        cell_format1.set_align('center')
+        cell_format5 = workbook.add_format({
+            'font_size': 12,
+            'font': '微软雅黑',
+            'border': 6,
+            'bg_color': 'FF8000',
+            'align': 'center',
+            'valign': 'vcenter'
+        })
 
-        worksheet.merge_range('C2:C3', '包名', merge_format)
-        worksheet.merge_range('D2:N2', '冷启动', merge_format)
-        worksheet.merge_range('O2:Y2', '热启动', merge_format)
-        worksheet.write('D3', '1st', cell_format1)
-        worksheet.write('E3', '2nd', cell_format1)
-        worksheet.write('F3', '3rd', cell_format1)
-        worksheet.write('G3', '4th', cell_format1)
-        worksheet.write('H3', '5th', cell_format1)
-        worksheet.write('I3', '6th', cell_format1)
-        worksheet.write('J3', '7th', cell_format1)
-        worksheet.write('K3', '8th', cell_format1)
-        worksheet.write('L3', '9th', cell_format1)
-        worksheet.write('M3', '10th', cell_format1)
-        worksheet.write('N3', 'Average', cell_format1)
-        worksheet.write('O3', '1st', cell_format1)
-        worksheet.write('P3', '2nd', cell_format1)
-        worksheet.write('Q3', '3rd', cell_format1)
-        worksheet.write('R3', '4th', cell_format1)
-        worksheet.write('S3', '5th', cell_format1)
-        worksheet.write('T3', '6th', cell_format1)
-        worksheet.write('U3', '7th', cell_format1)
-        worksheet.write('V3', '8th', cell_format1)
-        worksheet.write('W3', '9th', cell_format1)
-        worksheet.write('X3', '10th', cell_format1)
-        worksheet.write('Y3', 'Average', cell_format1)
+        # 居中对齐
+        # cell_format1.set_align('vcenter')
+        # cell_format1.set_align('center')
+
+        # ################报告表头部分#####################
+        worksheet.merge_range('C2:N2', 'XXX项目性能测试-响应时间测试报告', merge_format1)
+        worksheet.merge_range('D3:N3', '', merge_format1)
+        worksheet.merge_range('D4:N4', '', merge_format1)
+        worksheet.merge_range('D5:N5', '', merge_format1)
+        worksheet.merge_range('D6:N6', '', merge_format1)
+        worksheet.write('C3', '项目名称', cell_format5)
+        worksheet.write('C4', '软件版本', cell_format5)
+        worksheet.write('C5', '测试时间', cell_format5)
+        worksheet.write('C6', '测试结果', cell_format5)
+
+        # ################数据部分#########################
+        worksheet.merge_range('C8:C9', '包名', merge_format)
+        worksheet.merge_range('D8:N8', '冷启动(单位:ms)', merge_format)
+        worksheet.merge_range('O8:Y8', '热启动(单位:ms)', merge_format)
+        worksheet.write('D9', '1st', cell_format1)
+        worksheet.write('E9', '2nd', cell_format1)
+        worksheet.write('F9', '3rd', cell_format1)
+        worksheet.write('G9', '4th', cell_format1)
+        worksheet.write('H9', '5th', cell_format1)
+        worksheet.write('I9', '6th', cell_format1)
+        worksheet.write('J9', '7th', cell_format1)
+        worksheet.write('K9', '8th', cell_format1)
+        worksheet.write('L9', '9th', cell_format1)
+        worksheet.write('M9', '10th', cell_format1)
+        worksheet.write('N9', 'Average', cell_format1)
+        worksheet.write('O9', '1st', cell_format1)
+        worksheet.write('P9', '2nd', cell_format1)
+        worksheet.write('Q9', '3rd', cell_format1)
+        worksheet.write('R9', '4th', cell_format1)
+        worksheet.write('S9', '5th', cell_format1)
+        worksheet.write('T9', '6th', cell_format1)
+        worksheet.write('U9', '7th', cell_format1)
+        worksheet.write('V9', '8th', cell_format1)
+        worksheet.write('W9', '9th', cell_format1)
+        worksheet.write('X9', '10th', cell_format1)
+        worksheet.write('Y9', 'Average', cell_format1)
         cell_format2.set_align('vcenter')
         cell_format3.set_align('vcenter')
 
         # 写入包名
         i = 0
         for appName, activityName in Activities.__members__.items():
-            worksheet.write('C'+str(4 + i), str(activityName.value).split('/')[0], cell_format2)
+            worksheet.write('C'+str(10 + i), str(activityName.value).split('/')[0], cell_format2)
             i = i + 1
+
         # 求平均值
         j = 0
         for appName, activityName in Activities.__members__.items():
-            worksheet.write_formula('N' + str(4 + j), '=AVERAGE(D' + str(4 + j) + ':M' + str(4 + j) + ')', cell_format4)
-            worksheet.write_formula('Y' + str(4 + j), '=AVERAGE(O' + str(4 + j) + ':X' + str(4 + j) + ')', cell_format4)
+            worksheet.write_formula('N' + str(10 + j),
+                                    '=AVERAGE(D' + str(10 + j) + ':M' + str(10 + j) + ')',
+                                    cell_format4)
+            worksheet.write_formula('Y' + str(10 + j),
+                                    '=AVERAGE(O' + str(10 + j) + ':X' + str(10 + j) + ')',
+                                    cell_format4)
             j = j + 1
 
         # 写入冷启动数据
@@ -121,9 +167,8 @@ class Data(object):
                     if column > 9:
                         row = row + 1
                         column = 0
-                    worksheet.write_number(3 + row, 3 + column, cold_data, cell_format3)
+                    worksheet.write_number(9 + row, 3 + column, cold_data, cell_format3)
                     column = column + 1
-
 
         # 写入热启动数据
         with open("../TestData/hot_raw_data.txt", 'r') as file2:
@@ -137,7 +182,7 @@ class Data(object):
                     if column > 9:
                         row = row + 1
                         column = 0
-                    worksheet.write_number(3 + row, 14 + column, hot_data, cell_format3)
+                    worksheet.write_number(9 + row, 14 + column, hot_data, cell_format3)
                     column = column + 1
 
         workbook.close()
