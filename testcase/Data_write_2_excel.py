@@ -3,11 +3,9 @@
 import xlsxwriter
 from base.Activities import Activities
 
-"""
-数据处理类，将结果写入excel表格中生成测试报告
-"""
-class Data(object):
 
+class Data(object):
+    """数据处理类，将结果写入excel表格中生成测试报告"""
 
     def write_data_2_excel(self):
         """

@@ -4,21 +4,19 @@ from base.Adb import ADB
 import time
 import os
 
-"""
-    冷启动,启动目标activity作为的参数
-    参数activityName:应用名称，如CONTACTS,MESSAGE
-    
-    实践证明：Total Time 的值和displayed的值是一样的，
-             所以提取Total Time的值更简单一些，displayed的值有可能会获取不到或者有遗漏
-"""
-
-
 class StartupTest(object):
-
     """
-    测试开始前先删除已存在的log文件
+     冷启动,启动目标activity作为的参数
+    参数activityName:应用名称，如CONTACTS,MESSAGE
+
+    实践证明：Total Time 的值和displayed的值是一样的,
+    所以提取Total Time的值更简单一些，displayed的值有可能会获取不到或者有遗漏
     """
     def delete_log_file(self):
+        """
+        测试开始前先删除已存在的log文件
+        :return:
+        """
         cold_log_file = "../TestData/cold_raw_data.txt"
         hot_log_file = "../TestData/hot_raw_data.txt"
         # 每次运行测试前先移除log文件
@@ -29,10 +27,12 @@ class StartupTest(object):
             os.remove(hot_log_file)
             print("删除: %s" % hot_log_file)
 
-    """
-    冷启动测试用例
-    """
     def cold_test(self, activity_name):
+        """
+        冷启动测试用例
+        :param activity_name:测试应用的 activity
+        :return:
+        """
         log_file = "../TestData/cold_raw_data.txt"
         adb = ADB()
         # 使log输出到cold_raw-data.txt文件中
@@ -68,10 +68,12 @@ class StartupTest(object):
                 f1.write(activity_name.split('/')[0] + "第 " + str(i + 1) + " 次 cold test ending...\r\n")
             time.sleep(3.0)
 
-    """
-    热启动测试用例
-    """
     def hot_test(self, activity_name):
+        """
+        热启动测试用例
+        :param activity_name: 测试应用activity
+        :return:
+        """
 
         test_file = "../TestData/hot_raw_data.txt"
         adb = ADB()
