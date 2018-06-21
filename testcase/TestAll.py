@@ -1,7 +1,7 @@
 
 from base.Activities import Activities
 from testcase.StartupTest import StartupTest
-from testcase.Data_write_2_excel import Data
+from base.Data_write_2_excel import Data
 import time
 
 

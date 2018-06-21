@@ -140,7 +140,7 @@ class Data(object):
         i = 0
         for appName, activityName in Activities.__members__.items():
             worksheet.write('C'+str(10 + i), str(activityName.value).split('/')[0], cell_format2)
-            i = i + 1
+            i += 1
 
         # 求平均值
         j = 0
@@ -151,7 +151,7 @@ class Data(object):
             worksheet.write_formula('Y' + str(10 + j),
                                     '=AVERAGE(O' + str(10 + j) + ':X' + str(10 + j) + ')',
                                     cell_format4)
-            j = j + 1
+            j += 1
 
         # 写入冷启动数据
         with open("../TestData/cold_raw_data.txt", 'r') as file1:
@@ -163,10 +163,10 @@ class Data(object):
                     cold_data = int(i.split(': ')[1])
 
                     if column > 9:
-                        row = row + 1
+                        row += 1
                         column = 0
                     worksheet.write_number(9 + row, 3 + column, cold_data, cell_format3)
-                    column = column + 1
+                    column += 1
 
         # 写入热启动数据
         with open("../TestData/hot_raw_data.txt", 'r') as file2:
@@ -178,9 +178,9 @@ class Data(object):
                     hot_data = int(i.split(': ')[1])
 
                     if column > 9:
-                        row = row + 1
+                        row += 1
                         column = 0
                     worksheet.write_number(9 + row, 14 + column, hot_data, cell_format3)
-                    column = column + 1
+                    column += 1
 
         workbook.close()
