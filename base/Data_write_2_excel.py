@@ -2,7 +2,7 @@
 
 import xlsxwriter
 from base.Activities import Activities
-
+import datetime
 
 class Data(object):
     """数据处理类，将结果写入excel表格中生成测试报告"""
@@ -13,8 +13,14 @@ class Data(object):
         :return:
         """
 
+        #   获取系统当前时间
+        now = datetime.datetime.now()  # 时间数组格式
+
+        #   转换为指定格式时间戳
+        timestamp = now.strftime("%H%M%S")
+
         # Create an new Excel file and add a worksheet.
-        workbook = xlsxwriter.Workbook('../report/TestReport.xlsx')
+        workbook = xlsxwriter.Workbook('../report/TestReport' + timestamp+ '.xlsx')
         worksheet = workbook.add_worksheet("测试报告")
 
         # Widen the first column to make the text clearer.
@@ -108,7 +114,7 @@ class Data(object):
         worksheet.write('C6', '测试结果', cell_format5)
 
         # ################数据部分#########################
-        worksheet.merge_range('C8:C9', '包名', merge_format)
+        worksheet.merge_range('C8:C9', '应用包名', merge_format)
         worksheet.merge_range('D8:N8', '冷启动(单位:ms)', merge_format)
         worksheet.merge_range('O8:Y8', '热启动(单位:ms)', merge_format)
         worksheet.write('D9', '1st', cell_format1)

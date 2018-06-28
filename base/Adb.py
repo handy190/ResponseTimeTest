@@ -35,7 +35,6 @@ class ADB(object):
         else:
             return self.execute("getprop | grep ro.serialno")
 
-
     def execute(self, command):
         """
         开启一个execute窗口并且执行command_text命令，将stdout输出到指定文件中
@@ -87,16 +86,19 @@ class ADB(object):
     def push(self, from_computor, to_phone):
         """
         push 文件到手机
-        :param from_computor:
-        :param to_phone:
+        :param from_computor:   电脑文件位置
+        :param to_phone:    手机文件位置
         :return:
         """
         return self.cmd("push " + from_computor + " " + to_phone)
 
-    """
-    pull 手机文件
-    """
     def pull(self, from_phone, to_computor):
+        '''
+        pull 手机文件到电脑
+        :param from_phone: 手机文件位置
+        :param to_computor: 电脑文件位置
+        :return: 
+        '''
         return self.cmd("pull " + from_phone + " " + to_computor)
 
     def install(self, apk_path):
@@ -107,13 +109,13 @@ class ADB(object):
         """
         return self.cmd("install -r -g " + apk_path)
 
-    """
-    卸载apk
-    package: 应用包名
-    """
     def uninstall(self, package):
+        """
+        卸载 APK
+        :param package: 包名
+        :return:
+        """
         return self.cmd("shell pm uninstall " + package)
-
 
     def shell(self, command):
         """
@@ -122,7 +124,6 @@ class ADB(object):
         :return:
         """
         return self.execute("shell " + command)
-
 
     def start(self, activity):
         """
@@ -150,7 +151,6 @@ class ADB(object):
         :return:
         """
         return self.execute("logcat -d " + command)
-
 
     def getLogcatString(self, str):
         """
