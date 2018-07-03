@@ -9,9 +9,9 @@ class Activities(Enum):
         注意：activity的书写顺序即为用例执行顺序（因为按照遍历顺序来执行用例），如需改动用例执行顺序在此处改动即可
     """
 
-    MESSAGE = "com.android.mms/.ui.ConversationList"
+    # MESSAGE = "com.android.mms/.ui.ConversationList"
 
-    # MESSAGE = "com.google.android.apps.messaging/.ui.ConversationListActivity"
+    MESSAGE = "com.google.android.apps.messaging/.ui.ConversationListActivity"
 
     CONTACTS = "com.android.contacts/.activities.PeopleActivity"
 
@@ -23,7 +23,9 @@ class Activities(Enum):
 
     MUSIC = "com.android.music/.MusicBrowserActivity"
 
-    CALCULATOR = "com.android.calculator2/.Calculator"
+    # CALCULATOR = "com.android.calculator2/.Calculator"
+
+    CALCULATOR = "com.google.android.calculator/com.android.calculator2.Calculator"
 
     SYSTEM_CLOCK = "com.android.deskclock/.DeskClock"
 
@@ -33,20 +35,32 @@ class Activities(Enum):
 
     DIALER = "com.android.dialer/.DialtactsActivity"
 
+    # QQ
     QQ = "com.tencent.mobileqq/.activity.SplashActivity"
 
-    WECHAT = "com.tencent.mm/.app.WeChatSplashActivity"
+    # 微信
+    WECHAT = "com.tencent.mm/com.tencent.mm.ui.LauncherUI"
 
-    TENCENT_VIDEO = "com.tencent.news/com.tencent.news.activity.SplashActivity"
-
-    JD_SHOPPING = "com.jingdong.app.mall/.MainFrameActivity"
-
+    # 抖音
     DOUYIN = "com.ss.android.ugc.aweme/.main.MainActivity"
 
+    # 快手
+    KUAISHOU = "com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity"
+
+    # 淘宝
     TAOBAO = "com.taobao.taobao/com.taobao.tao.homepage.MainActivity3"
 
+    # 腾讯新闻
     TENCENT_NEWS = "com.tencent.news/.activity.SplashActivity"
 
+    # 支付宝
     ALIPAY = "com.eg.android.AlipayGphone/.AlipayLogin"
 
+    # 美团
+    MEITUAN = "com.sankuai.meituan/com.meituan.android.pt.homepage.activity.MainActivity"
+
+    # 消消乐
     XIAOXIAOLE = "com.happyelements.AndroidAnimal.qq/com.happyelements.hellolua.MainActivity"
+
+    # 地铁跑酷
+    DITIEPAOKU = "com.kiloo.subwaysurf.bd/com.kiloo.subwaysurf.RRAndroidPluginActivity"

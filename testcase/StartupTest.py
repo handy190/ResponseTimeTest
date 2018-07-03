@@ -4,6 +4,7 @@ from base.Adb import ADB
 import time
 import os
 
+
 class StartupTest(object):
     """
      冷启动,启动目标activity作为的参数
@@ -57,7 +58,7 @@ class StartupTest(object):
             time.sleep(10.0)
             # 获取logcat 的 displayed 字段
             adb.getLogcatString("Displayed")
-            time.sleep(5.0)
+            time.sleep(10.0)
             # 强制停止应用
             adb.force_stop(activity_name.split('/')[0])
             time.sleep(5.0)
@@ -66,7 +67,7 @@ class StartupTest(object):
             print(activity_name.split('/')[0] + "第 " + str(i + 1) + " 次 cold test ending...")
             with open("../TestData/cold_raw_data.txt", 'a+') as f1:
                 f1.write(activity_name.split('/')[0] + "第 " + str(i + 1) + " 次 cold test ending...\r\n")
-            time.sleep(3.0)
+            time.sleep(5.0)
 
     def hot_test(self, activity_name):
         """
@@ -78,16 +79,20 @@ class StartupTest(object):
         test_file = "../TestData/hot_raw_data.txt"
         adb = ADB()
         # 使log输出到hot_raw-data.txt文件中
-        adb.setFlag("HOT")
+        adb.setFlag('HOT')
         # 制造一次热启动条件,不会记录时间到log文本中
         adb.cmd("shell am start -W " + activity_name)
         time.sleep(5.0)
         # 点击home键
-        adb.shell("input keyevent 4")
+        adb.shell("input keyevent 3")
+        time.sleep(1.0)
+        adb.shell("input keyevent 3")
+        time.sleep(1.0)
+        adb.shell("input keyevent 3")
         time.sleep(5.0)
         # 每次执行前清除一次log
         adb.clearLogcat()
-        time.sleep(3.0)
+        time.sleep(5.0)
 
         for i in range(10):
 
@@ -99,9 +104,13 @@ class StartupTest(object):
             adb.start(activity_name)
             time.sleep(10.0)
             adb.getLogcatString("Displayed")
-            time.sleep(5.0)
+            time.sleep(10.0)
             # 点击home键
-            adb.shell("input keyevent 4")
+            adb.shell("input keyevent 3")
+            time.sleep(1.0)
+            adb.shell("input keyevent 3")
+            time.sleep(1.0)
+            adb.shell("input keyevent 3")
 
             #   每次获取完log就要清除一次
             adb.clearLogcat()
@@ -110,4 +119,4 @@ class StartupTest(object):
             print(activity_name.split('/')[0] + "第 " + str(i + 1) + " 次 hot test ending...")
             with open(test_file, 'a+') as f1:
                 f1.write(activity_name.split('/')[0] + "第 " + str(i + 1) + " 次 hot test ending...\r\n")
-            time.sleep(3.0)
+            time.sleep(5.0)

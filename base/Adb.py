@@ -68,7 +68,7 @@ class ADB(object):
         command_result = ''
         command_text = 'adb %s ' % command
         results = os.popen(command_text, "r")
-        while 1:
+        while True:
             line = results.readline()
             if not line: break
             command_result += line
