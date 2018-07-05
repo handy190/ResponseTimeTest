@@ -226,7 +226,7 @@ class Data(object):
                                     '=AVERAGE(R' + str(10 + j) + ':AA' + str(10 + j) + ')',
                                     cell_format4)
             worksheet.write_formula('P' + str(10 + j), '=N' + str(10 + j) + '-O' + str(10 + j), cell_format8)
-            worksheet.write_formula('AD' + str(10 + j), '=N' + str(10 + j) + '-AC' + str(10 + j), cell_format8)
+            worksheet.write_formula('AD' + str(10 + j), '=AB' + str(10 + j) + '-AC' + str(10 + j), cell_format8)
 
             worksheet.write_formula('Q' + str(10 + j), '=IF(P' + str(10 + j) + '>' + str(cold_difference_value) +
                                     ', "Fail", "Pass")',
