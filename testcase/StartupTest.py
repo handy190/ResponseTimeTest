@@ -55,10 +55,10 @@ class StartupTest(object):
             print(activity_name.split('/')[0] + "第 " + str(i + 1) + " 次 cold test beginning...")
             # 启动一个activity, -S 启动Activity前强行停止目标应用(冷启动)
             adb.start("-S " + activity_name)
-            time.sleep(10.0)
+            time.sleep(30.0)
             # 获取logcat 的 displayed 字段
             adb.getLogcatString("Displayed")
-            time.sleep(10.0)
+            time.sleep(5.0)
             # 强制停止应用
             adb.force_stop(activity_name.split('/')[0])
             time.sleep(5.0)
@@ -85,9 +85,9 @@ class StartupTest(object):
         time.sleep(5.0)
         # 点击home键
         adb.shell("input keyevent 3")
-        time.sleep(1.0)
+        time.sleep(3.0)
         adb.shell("input keyevent 3")
-        time.sleep(1.0)
+        time.sleep(3.0)
         adb.shell("input keyevent 3")
         time.sleep(5.0)
         # 每次执行前清除一次log
@@ -104,12 +104,12 @@ class StartupTest(object):
             adb.start(activity_name)
             time.sleep(10.0)
             adb.getLogcatString("Displayed")
-            time.sleep(10.0)
+            time.sleep(5.0)
             # 点击home键
             adb.shell("input keyevent 3")
-            time.sleep(1.0)
+            time.sleep(3.0)
             adb.shell("input keyevent 3")
-            time.sleep(1.0)
+            time.sleep(3.0)
             adb.shell("input keyevent 3")
 
             #   每次获取完log就要清除一次

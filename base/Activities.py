@@ -68,5 +68,3 @@ class Activities(Enum):
     # 消消乐
     XIAOXIAOLE = "com.happyelements.AndroidAnimal.qq/com.happyelements.hellolua.MainActivity"
 
-    # 地铁跑酷
-    DITIEPAOKU = "com.kiloo.subwaysurf.bd/com.kiloo.subwaysurf.RRAndroidPluginActivity"

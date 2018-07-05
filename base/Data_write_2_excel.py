@@ -13,6 +13,9 @@ class Data(object):
         :return:
         """
 
+        cold_difference_value = 500  # 判断标准值与平均值的差值，可根据实际情况改动
+        hot_difference_value = 100  # 判断标准值与平均值的差值，可根据实际情况改动
+
         #   获取系统当前时间
         now = datetime.datetime.now()  # 时间数组格式
 
@@ -34,7 +37,7 @@ class Data(object):
         worksheet.set_row(3, 30)
         worksheet.set_row(4, 30)
         worksheet.set_row(5, 30)
-        worksheet.set_row(2, 30)
+        worksheet.set_row(6, 15)
         worksheet.set_row(8, 40)
         worksheet.set_row(7, 25)
 
@@ -102,6 +105,7 @@ class Data(object):
             'font_size': 12,
             'font': 'Arial Black',
             'border': 6,
+            'bg_color': '#BCF57D',
             'align': 'center',
             'valign': 'vcenter'
         })
@@ -116,12 +120,7 @@ class Data(object):
             'valign': 'vcenter'
         })
 
-        cell_format6 = workbook.add_format({
-            'bg_color': 'C7FFD4'
-        })
 
-        cold_difference_value = 500  # 判断标准值与平均值的差值，可根据实际情况改动
-        hot_difference_value = 100  # 判断标准值与平均值的差值，可根据实际情况改动
         # ################报告表头部分#####################
         worksheet.merge_range('C2:Q2', 'XXX项目性能测试-响应时间测试报告', merge_format1)
         worksheet.merge_range('D3:Q3', '', merge_format1)
@@ -167,8 +166,6 @@ class Data(object):
         worksheet.write('AE9', '结果', cell_format1)
         cell_format2.set_align('vcenter')
         cell_format3.set_align('vcenter')
-        # 设置单元格格式小数点位数
-        cell_format4.set_num_format('0')
 
         # 写入包名
         i = 0
@@ -207,8 +204,8 @@ class Data(object):
                     column += 1
 
         # 写入标准值
-        cold_standard_values = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
-        hot_standard_values = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
+        cold_standard_values = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+        hot_standard_values = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
 
         for k in range(Activities.__members__.items().__len__()):
             worksheet.write_number('O' + str(10 + k),cold_standard_values[k], cell_format4)
