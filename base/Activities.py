@@ -47,6 +47,12 @@ class Activities(Enum):
     # 快手
     KUAISHOU = "com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity"
 
+    # 优酷
+    YOUKU = "com.youku.phone/com.youku.ui.activity.HomePageActivity"
+
+    # 爱奇艺
+    AIQIYI = "com.qiyi.video/org.qiyi.android.video.MainActivity"
+
     # 淘宝
     TAOBAO = "com.taobao.taobao/com.taobao.tao.homepage.MainActivity3"
 
