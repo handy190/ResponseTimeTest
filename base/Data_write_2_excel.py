@@ -167,6 +167,8 @@ class Data(object):
         worksheet.write('AE9', '结果', cell_format1)
         cell_format2.set_align('vcenter')
         cell_format3.set_align('vcenter')
+        # 设置单元格格式小数点位数
+        cell_format4.set_num_format('0')
 
         # 写入包名
         i = 0
