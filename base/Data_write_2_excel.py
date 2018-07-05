@@ -207,18 +207,14 @@ class Data(object):
         # 写入标准值
         cold_standard_values = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
         hot_standard_values = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]
-        k = 0
-        q = 0
-        for appName, activityName in Activities.__members__.items():
+
+        for k in range(Activities.__members__.items().__len__()):
             worksheet.write_number('O' + str(10 + k),cold_standard_values[k], cell_format4)
-            worksheet.write_number('AC' + str(10 + k), hot_standard_values[q], cell_format4)
-            k += 1
-            q += 1
+            worksheet.write_number('AC' + str(10 + k), hot_standard_values[k], cell_format4)
+
 
         # 求平均值、差值、结果
-        j = 0
-
-        for appName, activityName in Activities.__members__.items():
+        for j in range(Activities.__members__.items().__len__()):
             worksheet.write_formula('N' + str(10 + j),
                                     '=AVERAGE(D' + str(10 + j) + ':M' + str(10 + j) + ')',
                                     cell_format4)
@@ -234,7 +230,6 @@ class Data(object):
             worksheet.write_formula('AE' + str(10 + j), '=IF(AD' + str(10 + j) + '>' + str(hot_difference_value) +
                                     ', "Fail", "Pass")',
                                     cell_format9)
-            j += 1
 
         # 缩放80%比例
         worksheet.set_zoom(80)
@@ -253,12 +248,6 @@ class Data(object):
             'values': '=测试报告!$AB$10:$AB$' + str(num + 9),
             'gap': 200
         })
-
-        package = 0
-        package_list = []
-        for appName, activityName in Activities.__members__.items():
-            package_list.append(str(activityName.value).split('/')[0].split('.')[-1])
-            package += 1
 
         chart.set_x_axis({
             'name': '应用包名',
