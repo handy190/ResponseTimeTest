@@ -17,21 +17,21 @@ class Activities(Enum):
 
     CAMERA = "com.mediatek.camera/.CameraLauncher"
 
-    GALLERY = "com.android.gallery3d/.app.GalleryActivity"
+    # GALLERY = "com.android.gallery3d/.app.GalleryActivity"
 
     SETTINGS = "com.android.settings/.Settings"
 
     MUSIC = "com.android.music/.MusicBrowserActivity"
 
-    # CALCULATOR = "com.android.calculator2/.Calculator"
+    CALCULATOR = "com.android.calculator2/.Calculator"
 
-    CALCULATOR = "com.google.android.calculator/com.android.calculator2.Calculator"
+    # CALCULATOR = "com.google.android.calculator/com.android.calculator2.Calculator"
 
     SYSTEM_CLOCK = "com.android.deskclock/.DeskClock"
 
     FILE_MANAGER = "com.mediatek.filemanager/.FileManagerOperationActivity"
 
-    BROWSER = "com.android.browser/.BrowserActivity"
+    # BROWSER = "com.android.browser/.BrowserActivity"
 
     DIALER = "com.android.dialer/.DialtactsActivity"
 

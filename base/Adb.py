@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
+import datetime
 import os
 import subprocess
-import datetime
 from distutils.spawn import find_executable
-from base.Activities import Activities
 
 
 class ADB(object):
-
     # 全局变量,用于标记
     FLAG = ''
 
@@ -25,15 +23,23 @@ class ADB(object):
     def getFlag(self):
         return FLAG
 
-    def serial(self):
+    def serial_no(self):
         """
         获取手机序列号
         :return:
         """
         if os.name == 'nt':
-            return self.execute("getprop | findstr ro.serialno")
+            return self.cmd("shell getprop | findstr ro.serialno").split(': ')[1]
         else:
-            return self.execute("getprop | grep ro.serialno")
+            return self.cmd("shell getprop | grep ro.serialno").split(': ')[1]
+
+    def getPackage(self):
+        """
+        获取包名
+        :return:
+        """
+        return self.read_cmd('shell pm list package')
+
 
     def execute(self, command):
         """
@@ -67,12 +73,25 @@ class ADB(object):
         """
         command_result = ''
         command_text = 'adb %s ' % command
-        results = os.popen(command_text, "r")
+        results = os.popen(command_text, 'r')
         while True:
-            line = results.readline()
+            line = results.read()
             if not line: break
             command_result += line
-        return command_text
+        return command_result
+
+    def read_cmd(self, cmd):
+        """
+        这里主要用来获取包名
+        :param cmd:
+        :return:
+        """
+        command_text = 'adb %s ' % cmd
+        results = subprocess.Popen(command_text, shell=True, stdout=subprocess.PIPE)
+        result = []
+        for i in results.stdout.readlines():
+            result.append(str(i).split(':')[1].split("\\")[0])
+        return result
 
     def devices(self):
         """
@@ -158,7 +177,7 @@ class ADB(object):
         :param str:
         :return:
         """
-        if os.name == 'nt': # Windows 系统
+        if os.name == 'nt':  # Windows 系统
             return self.getLogcat("| findstr " + str)
         else:
             return self.getLogcat("| grep " + str)
@@ -179,4 +198,3 @@ class ADB(object):
         timestamp = now.strftime("%Y%m%d%H%M%S")
 
         return self.execute("shell screencap -p /mnt/sdcard/ScreenShot/screen_shot" + timestamp + ".png")
-

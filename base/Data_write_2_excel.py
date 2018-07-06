@@ -24,7 +24,7 @@ class Data(object):
 
         # Create an new Excel file and add a worksheet.
         workbook = xlsxwriter.Workbook('../report/PerformanceTestReport' + timestamp+ '.xlsx')
-        worksheet = workbook.add_worksheet("测试报告")
+        worksheet = workbook.add_worksheet('测试报告')
 
         # Widen the first column to make the text clearer.
         worksheet.set_column('A:A', 1)
@@ -204,8 +204,16 @@ class Data(object):
                     column += 1
 
         # 写入标准值
-        cold_standard_values = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
-        hot_standard_values = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]
+        cold_standard_values = [1,2,3,4,5,
+                                6,7,8,9,10,
+                                11,12,13,14,15,
+                                16,17,18,19,20,
+                                21,22,23]
+        hot_standard_values = [1,2,3,4,5,
+                               6,7,8,9,10,
+                               11,12,13,14,15,
+                               16,17,18,19,20,
+                               21,22,23]
 
         for k in range(Activities.__members__.items().__len__()):
             worksheet.write_number('O' + str(10 + k),cold_standard_values[k], cell_format4)

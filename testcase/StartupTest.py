@@ -3,6 +3,7 @@
 from base.Adb import ADB
 import time
 import os
+from base.Activities import Activities
 
 
 class StartupTest(object):
@@ -13,6 +14,18 @@ class StartupTest(object):
     实践证明：Total Time 的值和displayed的值是一样的,
     所以提取Total Time的值更简单一些，displayed的值有可能会获取不到或者有遗漏
     """
+    def check_phone_package(self):
+        """
+        检查手机包名
+        :return:
+        """
+        phone_packages = ADB().getPackage()
+        for k,v in Activities.__members__.items():
+
+            item = v.value.split('/')[0]
+            if item not in phone_packages:
+                raise InterruptedError('包名:' + item + ' 不存在或者名字写错了...还不赶快去检查一下Activities类？？？')
+
     def delete_log_file(self):
         """
         测试开始前先删除已存在的log文件
@@ -84,11 +97,11 @@ class StartupTest(object):
         adb.cmd("shell am start -W " + activity_name)
         time.sleep(5.0)
         # 点击home键
-        adb.shell("input keyevent 3")
+        adb.cmd("shell input keyevent 3")
         time.sleep(3.0)
-        adb.shell("input keyevent 3")
+        adb.cmd("shell input keyevent 3")
         time.sleep(3.0)
-        adb.shell("input keyevent 3")
+        adb.cmd("shell input keyevent 3")
         time.sleep(5.0)
         # 每次执行前清除一次log
         adb.clearLogcat()

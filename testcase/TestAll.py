@@ -30,6 +30,8 @@ class TestAll(object):
 
 
 if __name__ == '__main__':
+    print("开始检查包名。。。。")
+    StartupTest().check_phone_package()
     print("Now startup cold test...")
     TestAll().test_cold()
     print("Now startup hot test...")
