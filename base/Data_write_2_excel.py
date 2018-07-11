@@ -181,7 +181,7 @@ class Data(object):
             column = 0
             row = 0
             for i in lines:
-                if 'TotalTime' in i:
+                if 'ThisTime' in i:
                     cold_data = int(i.split(': ')[1])
 
                     if column > 9:
@@ -196,7 +196,7 @@ class Data(object):
             column = 0
             row = 0
             for i in lines:
-                if 'TotalTime' in i:
+                if 'ThisTime' in i:
                     hot_data = int(i.split(': ')[1])
 
                     if column > 9:
