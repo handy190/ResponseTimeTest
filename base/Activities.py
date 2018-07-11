@@ -11,29 +11,45 @@ class Activities(Enum):
 
     # MESSAGE = "com.android.mms/.ui.ConversationList"
 
-    MESSAGE = "com.google.android.apps.messaging/.ui.ConversationListActivity"
+    MESSAGE = "com.android.mms/com.qiku.android.mms.ui.MmsConversationListActivity"
 
-    CONTACTS = "com.android.contacts/.activities.PeopleActivity"
+    # MESSAGE = "com.google.android.apps.messaging/.ui.ConversationListActivity"
 
-    CAMERA = "com.mediatek.camera/.CameraLauncher"
+    # CONTACTS = "com.android.contacts/.activities.PeopleActivity"
+
+    CONTACTS = "com.qiku.android.contacts/com.qiku.android.contacts.ui.main.ContactMainActivity"
+
+    # CAMERA = "com.mediatek.camera/.CameraLauncher"
+
+    CAMERA = "com.android.camera/com.android.camera.Camera"
 
     # GALLERY = "com.android.gallery3d/.app.GalleryActivity"
 
+    GALLERY = "com.android.gallery3d/com.android.gallery3d.app.Gallery"
+
     SETTINGS = "com.android.settings/.Settings"
 
-    MUSIC = "com.android.music/.MusicBrowserActivity"
+    # MUSIC = "com.android.music/.MusicBrowserActivity"
 
-    CALCULATOR = "com.android.calculator2/.Calculator"
 
+    MUSIC = "com.qiku.music/com.qiku.music.main.activity.MainActivity"
+
+    # CALCULATOR = "com.android.calculator2/.Calculator"
     # CALCULATOR = "com.google.android.calculator/com.android.calculator2.Calculator"
+    CALCULATOR = "com.android.calculator2/com.android.calculator2.view.BaseActivity"
 
-    SYSTEM_CLOCK = "com.android.deskclock/.DeskClock"
+    # SYSTEM_CLOCK = "com.android.deskclock/.DeskClock"
+    SYSTEM_CLOCK = "com.qiku.android.xtime/qiku.xtime.ui.main.XTimeActivity"
 
-    FILE_MANAGER = "com.mediatek.filemanager/.FileManagerOperationActivity"
+    # FILE_MANAGER = "com.mediatek.filemanager/.FileManagerOperationActivity"
+    FILE_MANAGER = "com.qiku.android.filebrowser/com.qiku.android.filebrowser.activity.LeadingActivity"
 
     # BROWSER = "com.android.browser/.BrowserActivity"
+    BROWSER = "com.qihoo.browser/com.qihoo.browser.BrowserActivity"
+    # CHROME = "com.android.chrome/com.google.android.apps.chrome.Main"
 
-    DIALER = "com.android.dialer/.DialtactsActivity"
+    # DIALER = "com.android.dialer/.DialtactsActivity"
+    DIALER = "com.qiku.android.contacts/com.qiku.android.contacts.dial.DialActivity"
 
     # QQ
     QQ = "com.tencent.mobileqq/.activity.SplashActivity"

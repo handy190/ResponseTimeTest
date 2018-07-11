@@ -7,7 +7,7 @@ import time
 
 class TestAll(object):
 
-    """
+    """a
     冷热启动测试类
     """
     def test_hot(self):

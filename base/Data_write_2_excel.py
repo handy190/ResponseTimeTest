@@ -105,7 +105,6 @@ class Data(object):
             'font_size': 12,
             'font': 'Arial Black',
             'border': 6,
-            'bg_color': '#BCF57D',
             'align': 'center',
             'valign': 'vcenter'
         })
@@ -120,6 +119,9 @@ class Data(object):
             'valign': 'vcenter'
         })
 
+        red_format = workbook.add_format({'bg_color': 'red'})
+
+        green_format = workbook.add_format( {'bg_color':  '#BCF57D'})
 
         # ################报告表头部分#####################
         worksheet.merge_range('C2:Q2', 'XXX项目性能测试-响应时间测试报告', merge_format1)
@@ -238,6 +240,28 @@ class Data(object):
                                     ', "Fail", "Pass")',
                                     cell_format9)
 
+            worksheet.conditional_format('Q10:' + 'Q' + str(10 + j), {'type':      'text',
+                                                                       'criteria':  'begins with',
+                                                                       'value':     'Fa',
+                                                                       'format':    red_format
+                                                                       })
+            worksheet.conditional_format('Q10:' + 'Q' + str(10 + j), {'type': 'text',
+                                                                      'criteria': 'begins with',
+                                                                      'value': 'Pa',
+                                                                      'format': green_format
+                                                                      })
+
+
+            worksheet.conditional_format('AE10:' + 'AE' + str(10 + j), {'type': 'text',
+                                                                      'criteria': 'begins with',
+                                                                      'value': 'Fa',
+                                                                      'format': red_format
+                                                                      })
+            worksheet.conditional_format('AE10:' + 'AE' + str(10 + j), {'type': 'text',
+                                                                        'criteria': 'begins with',
+                                                                        'value': 'Pa',
+                                                                        'format': green_format
+                                                                        })
         # 缩放80%比例
         worksheet.set_zoom(80)
 
