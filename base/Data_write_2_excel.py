@@ -26,8 +26,11 @@ class Data(object):
         worksheet.set_column('A:A', 1)
         worksheet.set_column('B:B', 1)
         worksheet.set_column('C:C', 35)
-        worksheet.set_column('D:Q', 8)
-        worksheet.set_column('R:AE', 8)
+        worksheet.set_column('D:O', 8)
+        worksheet.set_column('P:P', 12)
+        worksheet.set_column('Q:AC', 8)
+        worksheet.set_column('AD:AD', 12)
+        worksheet.set_column('AE:AE', 8)
         worksheet.set_row(1, 30)
         worksheet.set_row(2, 30)
         worksheet.set_row(3, 30)
@@ -132,8 +135,8 @@ class Data(object):
 
         # ################数据部分#########################
         worksheet.merge_range('C8:C9', '应用包名', merge_format)
-        worksheet.merge_range('D8:Q8', '冷启动(单位:ms)    判断标准: 差值超过标准值的5%视为 fail,反之则 pass)', merge_format)
-        worksheet.merge_range('R8:AE8', '热启动(单位:ms)    判断标准: 差值超过标准值的5%视为 fail,反之则 pass)', merge_format)
+        worksheet.merge_range('D8:Q8', '冷启动(单位:ms)    判断标准: 差值占比超过标准值的5%视为 fail,反之则 pass)', merge_format)
+        worksheet.merge_range('R8:AE8', '热启动(单位:ms)    判断标准: 差值占比超过标准值的5%视为 fail,反之则 pass)', merge_format)
         worksheet.write('D9', '1st', cell_format1)
         worksheet.write('E9', '2nd', cell_format1)
         worksheet.write('F9', '3rd', cell_format1)
@@ -146,7 +149,7 @@ class Data(object):
         worksheet.write('M9', '10th', cell_format1)
         worksheet.write('N9', 'Average', cell_format1)
         worksheet.write('O9', '标准值', cell_format1)
-        worksheet.write('P9', '差值', cell_format1)
+        worksheet.write('P9', '差值占比(%)', cell_format1)
         worksheet.write('Q9', '结果', cell_format1)
         worksheet.write('R9', '1st', cell_format1)
         worksheet.write('S9', '2nd', cell_format1)
@@ -160,7 +163,7 @@ class Data(object):
         worksheet.write('AA9', '10th', cell_format1)
         worksheet.write('AB9', 'Average', cell_format1)
         worksheet.write('AC9', '标准值', cell_format1)
-        worksheet.write('AD9', '差值', cell_format1)
+        worksheet.write('AD9', '差值占比(%)', cell_format1)
         worksheet.write('AE9', '结果', cell_format1)
         cell_format2.set_align('vcenter')
         cell_format3.set_align('vcenter')
@@ -218,7 +221,7 @@ class Data(object):
             worksheet.write_number('AC' + str(10 + k), hot_standard_values[k], cell_format4)
 
 
-        # 求平均值、差值、结果
+        # 求平均值、差值占比、结果
         for j in range(Activities.__members__.items().__len__()):
             worksheet.write_formula('N' + str(10 + j),
                                     '=AVERAGE(D' + str(10 + j) + ':M' + str(10 + j) + ')',
@@ -226,14 +229,18 @@ class Data(object):
             worksheet.write_formula('AB' + str(10 + j),
                                     '=AVERAGE(R' + str(10 + j) + ':AA' + str(10 + j) + ')',
                                     cell_format4)
-            worksheet.write_formula('P' + str(10 + j), '=ABS(N' + str(10 + j) + '-O' + str(10 + j) + ')', cell_format8)
-            worksheet.write_formula('AD' + str(10 + j), '=ABS(AB' + str(10 + j) + '-AC' + str(10 + j) + ')', cell_format8)
+            worksheet.write_formula('P' + str(10 + j),
+                                    '=(N' + str(10 + j) + '-O' + str(10 + j) + ')/O' + str(10 + j) + '*100',
+                                    cell_format8)
+            worksheet.write_formula('AD' + str(10 + j),
+                                    '=(AB' + str(10 + j) + '-AC' + str(10 + j) + ')/AC' + str(10 + j) + '* 100',
+                                    cell_format8)
 
-            worksheet.write_formula('Q' + str(10 + j), '=IF(P' + str(10 + j) + '>(O' + str(10 + j) + ')' * 5% +
-                                    ', "Fail", "Pass")',
+            worksheet.write_formula('Q' + str(10 + j),
+                                    '=IF(P' + str(10 + j) + '>5.0 , "Fail", "Pass")',
                                     cell_format9)
-            worksheet.write_formula('AE' + str(10 + j), '=IF(AD' + str(10 + j) + '>(AC' + str(10 + j) + ')' * 5% +
-                                    ', "Fail", "Pass")',
+            worksheet.write_formula('AE' + str(10 + j),
+                                    '=IF(AD' + str(10 + j) + '>5.0 , "Fail", "Pass")',
                                     cell_format9)
 
             worksheet.conditional_format('Q10:' + 'Q' + str(10 + j), {'type':      'text',
