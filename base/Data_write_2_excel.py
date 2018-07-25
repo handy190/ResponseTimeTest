@@ -12,10 +12,6 @@ class Data(object):
         将数据写入excel
         :return:
         """
-
-        cold_difference_value = 500  # 判断标准值与平均值的差值，可根据实际情况改动
-        hot_difference_value = 100  # 判断标准值与平均值的差值，可根据实际情况改动
-
         #   获取系统当前时间
         now = datetime.datetime.now()  # 时间数组格式
 
@@ -136,8 +132,8 @@ class Data(object):
 
         # ################数据部分#########################
         worksheet.merge_range('C8:C9', '应用包名', merge_format)
-        worksheet.merge_range('D8:Q8', '冷启动(单位:ms)    判断标准: ' + str(cold_difference_value) + 'ms(差值大于该值视为 fail,反之则 pass)', merge_format)
-        worksheet.merge_range('R8:AE8', '热启动(单位:ms)    判断标准: ' + str(hot_difference_value) +'ms(差值大于该值视为 fail,反之则 pass)', merge_format)
+        worksheet.merge_range('D8:Q8', '冷启动(单位:ms)    判断标准: 差值超过标准值的5%视为 fail,反之则 pass)', merge_format)
+        worksheet.merge_range('R8:AE8', '热启动(单位:ms)    判断标准: 差值超过标准值的5%视为 fail,反之则 pass)', merge_format)
         worksheet.write('D9', '1st', cell_format1)
         worksheet.write('E9', '2nd', cell_format1)
         worksheet.write('F9', '3rd', cell_format1)
@@ -230,13 +226,13 @@ class Data(object):
             worksheet.write_formula('AB' + str(10 + j),
                                     '=AVERAGE(R' + str(10 + j) + ':AA' + str(10 + j) + ')',
                                     cell_format4)
-            worksheet.write_formula('P' + str(10 + j), '=N' + str(10 + j) + '-O' + str(10 + j), cell_format8)
-            worksheet.write_formula('AD' + str(10 + j), '=AB' + str(10 + j) + '-AC' + str(10 + j), cell_format8)
+            worksheet.write_formula('P' + str(10 + j), '=ABS(N' + str(10 + j) + '-O' + str(10 + j) + ')', cell_format8)
+            worksheet.write_formula('AD' + str(10 + j), '=ABS(AB' + str(10 + j) + '-AC' + str(10 + j) + ')', cell_format8)
 
-            worksheet.write_formula('Q' + str(10 + j), '=IF(P' + str(10 + j) + '>' + str(cold_difference_value) +
+            worksheet.write_formula('Q' + str(10 + j), '=IF(P' + str(10 + j) + '>(O' + str(10 + j) + ')' * 5% +
                                     ', "Fail", "Pass")',
                                     cell_format9)
-            worksheet.write_formula('AE' + str(10 + j), '=IF(AD' + str(10 + j) + '>' + str(hot_difference_value) +
+            worksheet.write_formula('AE' + str(10 + j), '=IF(AD' + str(10 + j) + '>(AC' + str(10 + j) + ')' * 5% +
                                     ', "Fail", "Pass")',
                                     cell_format9)
 

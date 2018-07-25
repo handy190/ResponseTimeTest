@@ -12,7 +12,7 @@ class TestAll(object):
     """
     def test_hot(self):
         """
-        冷启动测试
+        热启动测试
         :return:
         """
         # StartupTest().delete_log_file()   这里再删除会把cold_raw_data.txt删除掉
@@ -21,7 +21,7 @@ class TestAll(object):
 
     def test_cold(self):
         """
-        热启动测试
+        冷启动测试
         :return:
         """
         StartupTest().delete_log_file()
